@@ -1,4 +1,4 @@
-#JWT Crack
+# JWT Crack
 A tool used to perform a threaded dictionary attack against the secret keyword of HMAC signed tokens
 
 Usage: JWTCrack.py [-h] [-a {HS256,HS384,HS512}] [-t THREADS] encoded_jwt wordlist
