@@ -1,40 +1,36 @@
 #!/usr/bin/python3
-import sys, os, queue, threading, jwt
+import math, concurrent.futures, multiprocessing, jwt, argparse
 from termcolor import colored
 
-NumOfThreads=100
-Queue = queue.Queue()
+def try_secrets(secrets):
+    for secret in secrets:
 
-try:
-    encoded=sys.argv[1]
-    WordList=open(sys.argv[2],'r')
-except:
-    print("Usage: %s encoded wordlist" % sys.argv[0])
-    sys.exit(1)
+        try:
+            jwt.decode(encoded, secret, algorithm)
+            return secret
 
-class checkHash(threading.Thread):
-    def __init__(self,Queue):
-        threading.Thread.__init__(self)
-        self.Queue=Queue
-    def run(self):
-        while True:
-            self.secret=self.Queue.get()
-            try:
-                jwt.decode(encoded, self.secret, algorithms=['HS256'])
-                print(colored('Success! ['+self.secret+']','green'))
-                os._exit(0)
-                self.Queue.task_done()
-            except jwt.InvalidTokenError:
-                print(colored('Invalid Token ['+self.secret+']','red'))
-            except jwt.ExpiredSignatureError:
-                print(colored('Token Expired ['+self.secret+']','red'))
+        except jwt.InvalidTokenError:
+            pass
 
-for i in range(NumOfThreads):
-    t=checkHash(Queue)
-    t.setDaemon(True)
-    t.start()
+def partition(items, count):
+    return [items[i:i + count] for i in range(0, len(items), count)]
 
-for word in WordList.readlines():
-    Queue.put(word.strip())
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="""JWTCrack""", formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('encoded_jwt', help='Base64 Encoded JWT String')
+    parser.add_argument('wordlist', help='Dictionary wordlist file used to bruteforce the JWT')
+    parser.add_argument('-a', '--algorithm', help='HMAC Algorithm', required=False, default="HS256", choices=["HS256", "HS384", "HS512"])
+    parser.add_argument('-t', '--threads', help='Number of threads', type=int, required=False, default=multiprocessing.cpu_count())
+    args = parser.parse_args()
 
-Queue.join()
+    algorithm = args.algorithm
+    encoded = args.encoded_jwt
+
+    with concurrent.futures.ProcessPoolExecutor(max_workers=args.threads) as executor, open(args.wordlist, 'r') as wordlist:
+        wordlist = list(map(str.strip, wordlist.readlines()))
+
+        for result in executor.map(try_secrets, partition(wordlist, int(math.ceil(len(wordlist) / float(args.threads))))):
+
+            if result:
+                print(colored('Success! [' + result + ']', 'green'))
+                break
