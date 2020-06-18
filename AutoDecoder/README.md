@@ -1,5 +1,5 @@
 # Auto Decoder
-This tool allows users to decode strings automatically. In the event you have a string with several layers of encoding, this tool can easily decode it as many times as necessary until it gets the desired string.
+This tool allows users to decode strings automatically. In the event you have a string with several layers of encoding, this tool can easily decode it as many times as necessary until it gets a cleartext string.
 
 Supported Encoding Types Include:
 - Base64
