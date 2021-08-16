@@ -15,4 +15,4 @@ This library work by supplying it with the body of a domain (bing.com -> bing). 
 For a write-up on the various types of options, refer to the `Domain Fuzzer - Punycode` section [here](https://github.com/matamorphosis/Scrummage/wiki/The-Long-List-of-Tasks#domain-fuzzer).
 
 **Example of Usage**
-![Example](images/import.png)
+![Example](images/Import.png)
