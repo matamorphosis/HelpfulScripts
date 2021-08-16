@@ -22,7 +22,6 @@ if __name__ == '__main__':
     parser.add_argument('-a', '--algorithm', help='HMAC Algorithm', required=False, default="HS256", choices=["HS256", "HS384", "HS512"])
     parser.add_argument('-t', '--threads', help='Number of threads', type=int, required=False, default=multiprocessing.cpu_count())
     args = parser.parse_args()
-
     algorithm = args.algorithm
     encoded = args.encoded_jwt
 

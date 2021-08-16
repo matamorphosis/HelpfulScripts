@@ -6,7 +6,6 @@ Parser = argparse.ArgumentParser(description="""Session entropy calculator.""", 
 Parser.add_argument('-u', '--url', help='URL of target site.', required=True, type=str)
 Parser.add_argument('-c', '--cookie', help='Name of the cookie to target.', required=True, type=str)
 Arguments = Parser.parse_args()
-
 Target_URL = Arguments.url
 Target_Cookie = Arguments.cookie
 
