@@ -1,7 +1,7 @@
 # FlashVulnScan
-Currently in the world of penetration testing, flash (.swf) apps are no longer very common; however, that being said, they still exist. With SWFInvestigator no longer being readily available, I have written this quick script in accordance with OWASP's testing methods to help search for flash related vulnerabilties.
+Currently in the cyber worl, flash (.swf) apps are no longer very common and has been prevented from working in common web browsers like Google Chrome; however, that being said, they still exist. With SWFInvestigator no longer being readily available, I have written this quick script in accordance with OWASP's testing methods to help search for common, flash-related vulnerabilties.
 
-The program works by taking in a .swf file and decompiling all ActionScript (.as) files, through the use of JPEXS decompiler https://github.com/jindrapetrik/jpexs-decompiler.git. From there is searches all .as files for a variety of issues, and outputs them to a .txt file. In order for it to all work properly, run Dependencies.sh. This program is designed for debian-based, linux systems. For other distributions, please alter dependencies.sh accordingly.
+The program works by taking in a .swf file and decompiling is into ActionScript (.as) files, through the use of JPEXS decompiler, available on GitHub [here](https://github.com/jindrapetrik/jpexs-decompiler.git). From there, the script searches through all .as files for the aforementioned vulnerabilities, and outputs them to a .txt file. In order for it to all work properly, please install all dependencies, using the `Dependencies.sh` bash script. This program is designed for debian-based, linux systems. For other distributions, please alter the packages and package manager in `dependencies.sh` accordingly.
 
 Usage: FlashVulnScan.py [-h] [-d DECOMPILE] [-l LOCATION]
 
