@@ -17,5 +17,5 @@ The script will simply return an asterisk in it's place, as there is no point in
 This script supports both Unix and Quartz schedules, the above example uses Unix syntax.  
 The usage of the script is as follows:  
 ```console
-user@system:$ python3 CronScheduleEfficiencyFilter.py  -if <Name of file with schedules inside, separated by newlines> -of <Output file name> -t <type of schedule (Unix or Quartz)>
+user@system:$ python3 CronScheduleEfficiencyFilter.py -if <Name of file with schedules inside, separated by newlines> -of <Output file name> -t <type of schedule (Unix or Quartz)>
 ```
