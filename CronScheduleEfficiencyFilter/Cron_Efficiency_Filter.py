@@ -148,6 +148,9 @@ class Main:
                         if int(First_Segment) == End_Number:
                             Updated_Segment_List.append(First_Segment)
 
+                        elif First_Segment == Current_Segment:
+                            Updated_Segment_List.append(First_Segment)
+
                         else:
                             Updated_Segment_List.append(First_Segment + "-" + Current_Segment)
 
@@ -155,6 +158,10 @@ class Main:
 
                 elif any(Char in Segment_Item for Char in ["/", "?"]) or any(Seg.isalpha() for Seg in Segment_Item):
                     Non_Hardcoded_Segment_List.append(Segment_Item)
+                    Iterator += 1
+
+                elif Segment_Item.isnumeric():
+                    Updated_Segment_List.append(Segment_Item)
                     Iterator += 1
                 
                 else:
